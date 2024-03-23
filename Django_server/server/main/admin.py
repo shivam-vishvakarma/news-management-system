@@ -1,8 +1,9 @@
 from django.contrib import admin
-from .models import UserTable, Articls, Comments, Publisher
+from .models import User, Article, Comment, Publisher
 
 # Register your models here.
-admin.site.register(UserTable)
-admin.site.register(Articls)
-admin.site.register(Comments)
+admin.site.register(User)
+admin.site.register(Article)
+admin.site.register(Comment)
 admin.site.register(Publisher)
+
