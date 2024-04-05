@@ -4,7 +4,7 @@ const navClass =  ({isActive})=> isActive ? "block py-2 px-3 md:p-0 text-white b
 
 export default function Navbar() {
   return (
-    <header className="top-0 sticky ">
+    <header className="top-0 sticky z-10">
       <nav className="bg-white border-gray-200 dark:bg-gray-900">
         <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
           <NavLink

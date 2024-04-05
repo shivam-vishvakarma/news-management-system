@@ -1,3 +1,25 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+::-webkit-scrollbar{
+    @apply w-1 bg-gray-300 rounded-full;
+    display: none;
+}
+:hover::-webkit-scrollbar{
+    @apply bg-gray-300 w-2;
+    display: block;
+}
+
+:hover::-webkit-scrollbar:hover{
+    @apply bg-gray-400;
+
+}
+
+::-webkit-scrollbar-thumb{
+    @apply bg-gray-400 dark:bg-gray-700 rounded-full;
+}
+
+::-webkit-scrollbar-thumb:hover{
+    @apply bg-gray-500 dark:bg-gray-500;
+}
