@@ -4,7 +4,7 @@ export default function ContainerWithHeading({ children, heading }) {
       <h2 className=" mx-auto  w-min  whitespace-nowrap capitalize text-3xl dark:text-white ">
         {heading}
       </h2>
-      <div className={` w-full grid gap-2 `}>
+      <div className={`w-full grid gap-2`}>
             {children}
           </div>
     </div>
