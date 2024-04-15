@@ -15,5 +15,13 @@
 }
 
 ::-webkit-scrollbar{
-    @apply w-2;
+    @apply w-2 hidden;
+}
+
+:hover::-webkit-scrollbar{
+    @apply w-2 block absolute;
+}
+
+#loginBtn.active{
+    @apply hidden;
 }

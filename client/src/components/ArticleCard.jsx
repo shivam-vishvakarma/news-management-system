@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom";
 
-
-export default function Articles( {title=' Noteworthy technology acquisitions 2021', des=' Here are the biggest enterprise technology acquisitions of 2021 so far,in reverse chronological order.', link='/'}) {
+export default function ArticleCard( {title=' Noteworthy technology acquisitions 2021', des=' Here are the biggest enterprise technology acquisitions of 2021 so far,in reverse chronological order.', link='/'}) {
   return (
     <Link
       to={link}

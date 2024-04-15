@@ -30,7 +30,9 @@ export default function Search() {
           </div>
           <Form method="GET" action="/search" className="flex gap-2">
             <input
+              name="q"
               type="text"
+              autoFocus
               className="w-full border text-lg font-normal px-2 dark:bg-gray-500 outline-none border-gray-200 dark:border-gray-800 rounded-xl shadow-sm"
             />
             <button
