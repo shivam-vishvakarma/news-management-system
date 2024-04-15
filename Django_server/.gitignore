@@ -12,8 +12,9 @@ server/*.sqlite3
 env
 /server/**/migrations
 /server/**/__pycache__
-/server/**/**/*.pyc
-/server/**/**.cpython-312.pyc
+/server/server/__pycache__/*.cpython-312.pyc
+# /server/**/**/*.pyc
+/server/**/__pycache__/*.cpython-312.pyc
 # Ignore local settings
 local_settings.py
 
