@@ -10,7 +10,7 @@
 
 # Ignore virtual environment
 env
-/server/**/migrations
+/server/**/migrations/__pycache__
 /server/**/__pycache__
 
 # Ignore local settings
