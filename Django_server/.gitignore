@@ -1,6 +1,6 @@
 # Ignore database files
-server/*.sqlite3
-*.db
+/server/*.sqlite3
+/server/*.db
 
 # Ignore static files
 /staticfiles/
