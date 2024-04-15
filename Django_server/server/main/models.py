@@ -1,6 +1,5 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
-import datetime
 
 # Create your models here.
 class User(AbstractUser):
@@ -12,8 +11,6 @@ class User(AbstractUser):
 
     def __str__(self):
         return self.username + " and roll  " + self.user_roll
-    
-    
 
 class Publisher(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
@@ -21,21 +18,17 @@ class Publisher(models.Model):
     city = models.CharField(max_length=150, blank=False)
     country = models.CharField(max_length=150, blank=False)
     phone = models.CharField(max_length=150, blank=False)
+    approved = models.BooleanField(default=False)
 
 class Article(models.Model):
     articlsTitle = models.CharField(max_length=150)
     articlsContent = models.TextField()
     publisherId = models.ForeignKey(Publisher, on_delete=models.SET_NULL, null=True)
-    articlsDate = models.DateTimeField(default=datetime.datetime.now())
+    articlsDate = models.DateTimeField(auto_now=True, editable=False)
     tag= models.CharField(max_length=300 , blank=True , null=True, default='Newsy')
 
 class Comment(models.Model):
     articalId = models.ForeignKey(Article, on_delete=models.CASCADE)
     userId = models.ForeignKey(User, on_delete=models.CASCADE)
     commentContent = models.TextField()
-    commentDate = models.DateTimeField( default=datetime.datetime.now())
-    
-
-
-
-    
+    commentDate = models.DateTimeField(auto_now=True, editable=False)
