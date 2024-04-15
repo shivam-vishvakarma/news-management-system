@@ -66,7 +66,7 @@ export default function Navbar() {
               Newsy
             </span>
           </NavLink>
-          <div className="flex items-center md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse gap-3">
+          <div class="flex items-center md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse gap-3">
             <NavLink
               to="/login"
               id="loginBtn"
@@ -77,37 +77,37 @@ export default function Navbar() {
             {user && (
               <button
                 type="button"
-                className="flex text-sm bg-gray-800 rounded-full md:me-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600"
+                class="flex text-sm bg-gray-800 rounded-full md:me-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600"
                 id="user-menu-button"
                 aria-expanded="false"
                 data-dropdown-toggle="user-dropdown"
                 data-dropdown-placement="bottom"
               >
-                <span className="sr-only">Open user menu</span>
+                <span class="sr-only">Open user menu</span>
                 <img
-                  className="w-8 h-8 rounded-full"
+                  class="w-8 h-8 rounded-full"
                   src={user.photoURL || "/profile.jpg"}
                   alt="user photo"
                 />
               </button>
             )}
             <div
-              className="z-50 hidden my-4 text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700 dark:divide-gray-600"
+              class="z-50 hidden my-4 text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700 dark:divide-gray-600"
               id="user-dropdown"
             >
-              <div className="px-4 py-3">
-                <span className="block text-sm text-gray-900 dark:text-white">
+              <div class="px-4 py-3">
+                <span class="block text-sm text-gray-900 dark:text-white">
                   Bonnie Green
                 </span>
-                <span className="block text-sm text-gray-500 truncate dark:text-gray-400">
+                <span class="block text-sm text-gray-500 truncate dark:text-gray-400">
                   name@flowbite.com
                 </span>
               </div>
-              <ul className="py-2" aria-labelledby="user-menu-button">
+              <ul class="py-2" aria-labelledby="user-menu-button">
                 <li>
                   <a
                     href="#"
-                    className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
+                    class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
                   >
                     Dashboard
                   </a>
@@ -115,7 +115,7 @@ export default function Navbar() {
                 <li>
                   <a
                     href="#"
-                    className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
+                    class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
                   >
                     Settings
                   </a>
@@ -123,7 +123,7 @@ export default function Navbar() {
                 <li>
                   <a
                     href="#"
-                    className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
+                    class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
                   >
                     Earnings
                   </a>
@@ -131,7 +131,7 @@ export default function Navbar() {
                 <li>
                   <a
                     href="#"
-                    className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
+                    class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
                   >
                     Sign out
                   </a>
@@ -196,6 +196,44 @@ export default function Navbar() {
                 ></path>
               </svg>
             </button>
+          </div>
+          <div
+            ref={navRef}
+            className="items-center justify-between hidden w-full md:flex md:w-auto md:order-1"
+            id="navbar-cta"
+          >
+            <ul className="flex flex-col font-medium p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:space-x-8  md:flex-row md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
+              <li>
+                <NavLink to="/" className={navClass}>
+                  Home
+                </NavLink>
+              </li>
+              <li>
+                <NavLink to="/category" className={navClass}>
+                  Category
+                </NavLink>
+              </li>
+              <li>
+                <NavLink to="/article" className={navClass}>
+                  Articles
+                </NavLink>
+              </li>
+              <li className="grid grid-rows-1 gap-4 md:hidden">
+                <NavLink
+                  to="/login"
+                  id="loginBtn"
+                  className={`${navClass} text-center`}
+                >
+                  Login
+                </NavLink>
+                {/* <NavLink
+                  to="/register"
+                  className={`${navClass} text-center`}
+                >
+                  Register
+                </NavLink> */}
+              </li>
+            </ul>
           </div>
         </div>
       </nav>

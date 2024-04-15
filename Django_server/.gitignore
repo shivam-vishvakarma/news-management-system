@@ -10,8 +10,10 @@ server/*.sqlite3
 
 # Ignore virtual environment
 .venv
-*.pyc
-
+/server/**/migrations
+/server/**/__pycache__
+/server/**/**/*.pyc
+/server/**/**.cpython-312.pyc
 # Ignore local settings
 local_settings.py
 
