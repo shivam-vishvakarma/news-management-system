@@ -4,7 +4,7 @@ import datetime
 
 # Create your models here.
 class User(AbstractUser):
-    user_roll = models.CharField(max_length=50,)
+    user_roll = models.CharField(choices=[('user','user'),('publisher','publisher')], max_length=15 , default='user')
     email =models.EmailField(max_length=50)
     
     class Meta(AbstractUser.Meta):
@@ -17,16 +17,17 @@ class User(AbstractUser):
 
 class Publisher(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    publisherName = models.CharField(max_length=150)
-    city = models.CharField(max_length=150)
-    country = models.CharField(max_length=150)
-    phone = models.CharField(max_length=150)
+    publisherName = models.CharField(max_length=150, unique=True, blank=False)
+    city = models.CharField(max_length=150, blank=False)
+    country = models.CharField(max_length=150, blank=False)
+    phone = models.CharField(max_length=150, blank=False)
 
 class Article(models.Model):
     articlsTitle = models.CharField(max_length=150)
     articlsContent = models.TextField()
     publisherId = models.ForeignKey(Publisher, on_delete=models.SET_NULL, null=True)
     articlsDate = models.DateTimeField(default=datetime.datetime.now())
+    tag= models.CharField(max_length=300 , blank=True , null=True, default='Newsy')
 
 class Comment(models.Model):
     articalId = models.ForeignKey(Article, on_delete=models.CASCADE)
