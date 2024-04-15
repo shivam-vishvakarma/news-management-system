@@ -1,11 +1,10 @@
 from django.shortcuts import render
-# from rest_framework.decorators import api_view
 from rest_framework.viewsets import ModelViewSet
 from rest_framework.permissions import IsAdminUser, IsAuthenticatedOrReadOnly
 from rest_framework.authentication import TokenAuthentication, SessionAuthentication, BasicAuthentication
 from .models import User, Article, Comment, Publisher
 from .serializers import UserSerializer, ArticleSerializer, CommentSerializer, PublisherSerializer
-from rest_framework.decorators import api_view
+from rest_framework.decorators import api_view, action
 from rest_framework.response import Response
 from rest_framework.authtoken.models import Token
 from django.contrib.auth import authenticate
@@ -23,13 +22,39 @@ def login(request):
         return Response({'error': 'Invalid credentials'}, status=400)
     serializer = UserSerializer(user)
     token, _ = Token.objects.get_or_create(user=user)
-    return Response({"token": token.key, "_": _, "user": serializer.data} , status=200)
+    return Response({"token": token.key, "user": serializer.data} , status=200)
+@api_view(['POST'])
+def register(request):
+    serializer = UserSerializer(data=request.data)
+    if serializer.is_valid():
+        user = serializer.save()
+        user.set_password(user.password)
+        user.save()
+        token, _ = Token.objects.get_or_create(user=user)
+        return Response({"token": token.key, "user": serializer.data}, status=201)
+    return Response(serializer.errors, status=400)
+
+
+@api_view(['GET'])
+def categories(request , category):
+    articles = Article.objects.filter(tag__icontains=category)
+    serializer = ArticleSerializer(articles, many=True)
+    return Response(serializer.data, status=200)
 
 class UserViewSet(ModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer
     permission_classes = [IsAdminUser]
     authentication_classes = [TokenAuthentication]
+
+    def create(self, request):
+        serializer = UserSerializer(data=request.data)
+        if serializer.is_valid():
+            user = serializer.save()
+            user.set_password(user.password)
+            user.save()
+            return Response(serializer.data, status=201)
+        return Response(serializer.errors, status=400)
 
 class ArticleViewSet(ModelViewSet):
     queryset = Article.objects.all()
@@ -44,6 +69,12 @@ class CommentViewSet(ModelViewSet):
     permission_classes = [IsAuthenticatedOrReadOnly]
     authentication_classes = [TokenAuthentication]
 
+    @action(detail=False, methods=['GET'])
+    def article(self, request):
+        article_id = request.query_params.get('article_id')
+        comments = Comment.objects.filter(articalId=article_id)
+        serializer = CommentSerializer(comments, many=True)
+        return Response(serializer.data, status=200)
 
 class PublisherViewSet(ModelViewSet):
     queryset = Publisher.objects.all()

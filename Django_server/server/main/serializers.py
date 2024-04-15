@@ -6,7 +6,8 @@ from .models import User, Article, Comment, Publisher
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ['username','first_name','last_name','user_roll','email']
+        fields = ['username','first_name','last_name','email']
+       
 
 
 class ArticleSerializer(serializers.ModelSerializer):
@@ -15,10 +16,23 @@ class ArticleSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
+    def createTag(self, val):
+        if val == None:
+            return 'Newsy'
+        else:
+            
+            return val
+       
+        
+
+
 class CommentSerializer(serializers.ModelSerializer):
     class Meta:
         model = Comment
         fields = '__all__'
+
+
+    
 
 
 
