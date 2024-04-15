@@ -9,7 +9,7 @@ server/*.sqlite3
 /media/
 
 # Ignore virtual environment
-.venv
+env
 /server/**/migrations
 /server/**/__pycache__
 /server/**/**/*.pyc
