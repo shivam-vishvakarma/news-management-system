@@ -21,10 +21,10 @@ class Publisher(models.Model):
     approved = models.BooleanField(default=False)
 
 class Article(models.Model):
-    articlsTitle = models.CharField(max_length=150)
-    articlsContent = models.TextField()
+    articleTitle = models.CharField(max_length=150)
+    articleContent = models.TextField()
     publisherId = models.ForeignKey(Publisher, on_delete=models.SET_NULL, null=True)
-    articlsDate = models.DateTimeField(auto_now=True, editable=False)
+    articleDate = models.DateTimeField(auto_now=True, editable=False)
     tag= models.CharField(max_length=300 , blank=True , null=True, default='Newsy')
 
 class Comment(models.Model):
