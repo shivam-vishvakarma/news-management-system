@@ -44,7 +44,7 @@ export default function Register() {
     if (user) navigate("/");
   }, []);
   return (
-    <div className="w-full h-screen grid place-items-center p-10 overflow-auto">
+    <div className="w-full relative h-screen grid place-items-center p-10 overflow-auto">
       {error && <Alert message={"Some error occured "} type="error" />}
       <form
         className="w-full grid md:w-4/5 lg:w-2/5 m-auto gap-3"

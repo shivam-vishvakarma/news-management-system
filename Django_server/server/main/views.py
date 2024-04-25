@@ -1,7 +1,7 @@
 from django.db.models import Q
 from rest_framework.viewsets import ModelViewSet
 from rest_framework.permissions import IsAdminUser, IsAuthenticatedOrReadOnly
-from .permissions import IsMeOrReadOnly, IsPublisherOrReadOnly, IsAuthenticated, IsMeOrPublisher, IsMe
+from .permissions import IsMeOrReadOnly, IsPublisherOrReadOnly, IsAuthenticated, IsMeOrPublisher, IsMe, CommentIsMeOrPublisher
 from rest_framework.authentication import TokenAuthentication, SessionAuthentication, BasicAuthentication
 from .models import User, Article, Comment, Publisher
 from .serializers import UserSerializer, ArticleSerializer, CommentSerializer, PublisherSerializer
@@ -63,7 +63,7 @@ class UserViewSet(ModelViewSet):
 class CommentViewSet(ModelViewSet):
     queryset = Comment.objects.all()
     serializer_class = CommentSerializer
-    permission_classes = [IsAuthenticated, IsMeOrPublisher]
+    permission_classes = [IsAuthenticated, CommentIsMeOrPublisher]
     authentication_classes = [TokenAuthentication]
 
     @action(detail=False, methods=['GET'], permission_classes=[IsAuthenticated], url_path='publisher-comments')

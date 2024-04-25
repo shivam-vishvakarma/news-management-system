@@ -42,7 +42,7 @@ export default function Login() {
         }
     })
   return (
-    <div className="w-full h-screen grid place-items-center overflow-auto p-10 md:p-0">
+    <div className="w-full relative h-screen grid place-items-center overflow-auto p-10 md:p-0">
         {error && <Alert message={"Wrong Credentials"} type="error" error={{error,setError}}/>}
       <form className="w-full grid md:w-4/5 lg:w-2/5 m-auto gap-10" onSubmit={handleSubmit}>
         <div className="relative z-0 w-full mb-5 group">

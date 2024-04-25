@@ -1,6 +1,7 @@
 import { useUser } from "../context/contexts";
 import { base_url } from "../assets/server";
 import { useRef } from "react";
+import EditComment from "./EditComment";
 
 export default function CommentCard({ comment, isPublisher }) {
     const { user } = useUser();
@@ -52,10 +53,13 @@ export default function CommentCard({ comment, isPublisher }) {
           </p>
         </div>
         {(user?.user.username === comment.user?.username || isPublisher) && (
-          <div className="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
+          <div className="inline-flex gap-2 flex-col text-base font-semibold text-gray-900 dark:text-white">
             <button onClick={deleteComment} className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-1 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
               Delete
             </button>
+            {user?.user.username === comment.user?.username && (
+              <EditComment comment={comment} />
+            )}
           </div>
         )}
       </div>

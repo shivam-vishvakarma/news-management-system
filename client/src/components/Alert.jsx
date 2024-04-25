@@ -16,7 +16,7 @@ export default function Alert({
     <div
       id="infoAlert"
     //   ref={alert}
-      className={`flex items-center p-4 mb-4 rounded-lg w-full sm:w-4/5 lg:w-3/5 ${variant[type]}`}
+      className={`flex absolute top-10 items-center p-4 mb-4 rounded-lg w-full sm:w-4/5 lg:w-3/5 ${variant[type]}`}
       role="alert"
     >
       <svg
