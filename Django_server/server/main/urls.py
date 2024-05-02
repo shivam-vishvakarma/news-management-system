@@ -4,19 +4,19 @@ from rest_framework import routers
 from . import views
 
 
-routers = routers.DefaultRouter()
-routers.register('users', views.UserViewSet)
-routers.register('articles', views.ArticleViewSet)
-routers.register('comments', views.CommentViewSet)
-routers.register('publishers', views.PublisherViewSet)
+router = routers.DefaultRouter()
+router.register(r'users', views.UserViewSet)
+router.register(r'articles', views.ArticleViewSet)
+router.register(r'comments', views.CommentViewSet)
+router.register(r'publishers', views.PublisherViewSet)
 
 urlpatterns = [
-    path('', include(routers.urls)),
+    path('', include(router.urls)),
     path('login/', views.login, name='login'),
     path('register/', views.register, name='register'),
     path('categories/<slug:category>', views.categories, name='categories')
     
 
 ]
-urlpatterns += routers.urls
+urlpatterns += router.urls
 

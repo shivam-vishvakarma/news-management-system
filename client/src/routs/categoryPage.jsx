@@ -1,15 +1,20 @@
 import { useLoaderData } from "react-router-dom";
+import ArticlesContainer from "../components/ArticlesContainer";
+import BaseLayout from "./baseLayout";
+import { base_url } from "../assets/server";
 
 export async function loader({ params }) {
   const category = params.category;
-  return { category };
+  const res = await fetch(`${base_url}/categories/${category}`);
+    const data = await res.json();
+  return { category, data };
 }
 
 export default function CategoryPage() {
-    const { category } = useLoaderData();
+    const { category, data } = useLoaderData();
   return (
-    <div>
-      <h1>CategoryPage of {category}</h1>
-    </div>
+    <BaseLayout>
+      <ArticlesContainer heading={`${category.replace("_", " " )} News`} data={data} />
+    </BaseLayout>
   );
 }

@@ -1,16 +1,22 @@
-import { useLoaderData } from 'react-router-dom';
-
-export async function loader({ request }) {
-    const url = new URL(request.url);
-    const search = url.searchParams.get("q");
-  return { search };
-}
+import { useLocation } from "react-router-dom";
+import BaseLayout from "./baseLayout";
+import ArticlesContainer from "../components/ArticlesContainer";
+import { base_url } from "../assets/server";
+import { useEffect, useState } from "react";
 
 export default function Search() {
-    const { search } = useLoaderData();
+  const [searchArticles, setSearchArticles] = useState([]);
+  const location = useLocation();
+  const search = new URLSearchParams(location.search).get("q");
+  useEffect(()=>{
+    fetch(`${base_url}/articles/search?q=${search}`)
+      .then((res) => res.json())
+      .then((data) => setSearchArticles(data));
+  },[search])
+
   return (
-    <div>
-      <h1>Search for {search}</h1>
-    </div>
+    <BaseLayout>
+      <ArticlesContainer heading={`Search results for: ${search}`} data={searchArticles} />
+    </BaseLayout>
   );
 }
