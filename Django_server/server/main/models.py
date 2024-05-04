@@ -20,6 +20,9 @@ class Publisher(models.Model):
     phone = models.CharField(max_length=150, blank=False)
     approved = models.BooleanField(default=False)
 
+    def __str__(self):
+        return self.publisherName
+
 class Article(models.Model):
     articleTitle = models.CharField(max_length=150)
     articleContent = models.TextField()
@@ -27,8 +30,14 @@ class Article(models.Model):
     articleDate = models.DateTimeField(auto_now=True, editable=False)
     tag= models.CharField(max_length=300 , blank=True , null=True, default='Newsy')
 
+    def __str__(self):
+        return self.articleTitle
+
 class Comment(models.Model):
     articalId = models.ForeignKey(Article, on_delete=models.CASCADE)
     userId = models.ForeignKey(User, on_delete=models.CASCADE)
     commentContent = models.TextField()
     commentDate = models.DateTimeField(auto_now=True, editable=False)
+
+    def __str__(self):
+        return self.commentContent

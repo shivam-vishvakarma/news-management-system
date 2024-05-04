@@ -50,7 +50,6 @@ export default function ApplyPublisher() {
         });
         const data = await res.json();
         setIsApplied(data.is_applied);
-        console.log(isApplied, data.is_applied);
       }
     }
     checkPublisher();
