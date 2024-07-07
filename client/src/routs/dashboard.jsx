@@ -15,9 +15,9 @@ export default function Dashboard() {
   } else if (user?.user.user_roll === "publisher") {
     return <PublisherDashboard user={user}/>;
   } else if (user?.user.user_roll === "admin") {
-    return <AdminDashboard />;
+    return <AdminDashboard user={user} />;
   } else {
-    return (
+    return ( 
       <div className="flex justify-center">
         <p className="text-gray-900 dark:text-white text-4xl">
           You are not authorized to view this page

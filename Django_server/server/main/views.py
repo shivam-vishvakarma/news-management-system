@@ -22,8 +22,11 @@ def login(request):
     if not user.check_password(password):
         return Response({'error': 'Wrong password'}, status=400)
     serializer = UserSerializer(user)
+    data=serializer.data
+    if user.is_superuser:
+        data.update({'user_roll': 'admin'})
     token, _ = Token.objects.get_or_create(user=user)
-    return Response({"token": token.key, "user": serializer.data} , status=200)
+    return Response({"token": token.key, "user": data} , status=200)
 
 @api_view(['POST'])
 def register(request):
@@ -53,7 +56,10 @@ class UserViewSet(ModelViewSet):
     def me(self, request):
         user = request.user
         serializer = UserSerializer(user)
-        return Response(serializer.data, status=201)
+        data=serializer.data
+        if user.is_superuser:
+            data.update({'user_roll': 'admin'})
+        return Response(data, status=201)
 
     @action(detail=False, methods=['POST'])
     def logout(self,request):

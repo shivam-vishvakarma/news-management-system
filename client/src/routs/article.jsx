@@ -28,7 +28,7 @@ export default function Article() {
         "Content-Type": "application/json",
         Authorization: `Token ${user.token}`,
       },
-      body: JSON.stringify({ comment }),
+      body: JSON.stringify({ commentContent: comment}),
     });
     if (res.ok) {
       e.target.reset();
@@ -47,7 +47,8 @@ export default function Article() {
         <h1 className="text-3xl md:text-5xl capitalize">
           {article.articleTitle}
         </h1>
-        <address className="flex items-center border-y-2 border-white dark:border-gray-900 my-4 p-4 shadow font-extralight">
+        <address className="flex items-center border
+        -y-2 border-white dark:border-gray-900 my-4 p-4 shadow font-extralight">
           <div className="flex-shrink-0">
             <img
               className="w-8 h-8 rounded-full"

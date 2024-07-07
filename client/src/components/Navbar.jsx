@@ -105,7 +105,7 @@ export default function Navbar() {
                     </span>
                   </div>
                   <ul className="py-2" aria-labelledby="user-menu-button">
-                    {user["user"].user_roll === "publisher" && (
+                    {(user["user"].user_roll === "publisher" || user["user"].user_roll === "admin") && (
                       <li>
                         <Link
                           to="/dashboard"
@@ -115,7 +115,7 @@ export default function Navbar() {
                         </Link>
                       </li>
                     )}
-                    {user["user"].user_roll !== "publisher" && (
+                    {(user["user"].user_roll !== "publisher" && user.user.user_roll !== "admin") && (
                       <li>
                         <Link
                           to="/apply-publisher"
