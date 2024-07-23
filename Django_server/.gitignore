@@ -10,8 +10,6 @@
 
 # Ignore virtual environment
 env
-/server/**/migrations/__pycache__
-/server/**/__pycache__
 
 # Ignore local settings
 local_settings.py
@@ -26,3 +24,7 @@ local_settings.py
 # Ignore system files
 .DS_Store
 Thumbs.db
+
+# Ignoring pycache files
+/server/**/migrations/__pycache__
+/server/**/__pycache__

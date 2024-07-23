@@ -28,7 +28,7 @@ export default function Login() {
                 if (data["token"]) {
                     localStorage.setItem("token", JSON.stringify(data["token"]));
                     setUser(data);
-                    navigate("/");
+                    navigate(-1);
                 } else {
                     setError(data);
                 }
@@ -38,7 +38,7 @@ export default function Login() {
 
     useEffect(()=>{
         if (user) {
-            navigate("/");
+            navigate(-1);
         }
     })
   return (
