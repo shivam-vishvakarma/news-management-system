@@ -48,7 +48,7 @@ export default function TagContainer({ tags, setTags, articleId}) {
         ))}
       </div>
       <form className="flex gap-2 w-full" onSubmit={handleAddTag}>
-        <input
+        <input required
           type="text"
           placeholder="Add a tag"
           className="block w-full p-2 outline-none text-gray-900 border border-gray-300 rounded-lg bg-gray-50 text-xs focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"

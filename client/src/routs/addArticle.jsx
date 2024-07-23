@@ -36,7 +36,7 @@ export default function AddArticle() {
   useEffect(() => {
     if (!user) {
       navigate("/login");
-    } else if (user?.user.user_roll !== "publisher") {
+    } else if (user?.user.user_roll !== "publisher" && user?.user.user_roll !== "admin") {
       navigate("/");
     }
   }, []);

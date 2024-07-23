@@ -25,10 +25,10 @@ def login(request):
     if not user.is_active:
         return Response({'error': 'User is blocked'}, status=400)
     serializer = UserSerializer(user)
-    token, _ = Token.objects.get_or_create(user=user)
-    data = serializer.data
+    data=serializer.data
     if user.is_superuser:
         data.update({'user_roll': 'admin'})
+    token, _ = Token.objects.get_or_create(user=user)
     return Response({"token": token.key, "user": data} , status=200)
 
 @api_view(['POST'])
@@ -107,7 +107,6 @@ class ArticleViewSet(ModelViewSet):
         elif request.method == 'POST':
             request.data['articalId'] = pk
             request.data['userId'] = request.user.id
-            request.data['commentContent'] = " ".join(request.data['comment'].split())
             serializer = CommentSerializer(data=request.data)
             if serializer.is_valid():
                 serializer.save()
