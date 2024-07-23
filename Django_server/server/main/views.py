@@ -2,13 +2,12 @@ from django.db.models import Q
 from rest_framework.viewsets import ModelViewSet
 from rest_framework.permissions import IsAdminUser, IsAuthenticatedOrReadOnly
 from .permissions import IsMeOrReadOnly, IsPublisherOrReadOnly, IsAuthenticated, IsMeOrPublisher, IsMe, CommentIsMeOrPublisher
-from rest_framework.authentication import TokenAuthentication, SessionAuthentication, BasicAuthentication
+from rest_framework.authentication import TokenAuthentication, BasicAuthentication
 from .models import User, Article, Comment, Publisher
 from .serializers import UserSerializer, ArticleSerializer, CommentSerializer, PublisherSerializer
 from rest_framework.decorators import api_view, action
 from rest_framework.response import Response
 from rest_framework.authtoken.models import Token
-from django.contrib.auth import authenticate
 
 # Create your views here.
 
@@ -21,6 +20,10 @@ def login(request):
         return Response({'error': 'Invalid credentials'}, status=400)
     if not user.check_password(password):
         return Response({'error': 'Wrong password'}, status=400)
+    if user.user_roll == 'publisher' and not Publisher.objects.get(user=user).approved:
+        return Response({'error': 'Publisher not approved'}, status=400)
+    if not user.is_active:
+        return Response({'error': 'User is blocked'}, status=400)
     serializer = UserSerializer(user)
     data=serializer.data
     if user.is_superuser:
@@ -56,7 +59,7 @@ class UserViewSet(ModelViewSet):
     def me(self, request):
         user = request.user
         serializer = UserSerializer(user)
-        data=serializer.data
+        data = serializer.data
         if user.is_superuser:
             data.update({'user_roll': 'admin'})
         return Response(data, status=201)

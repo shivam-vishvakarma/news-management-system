@@ -4,19 +4,29 @@ import { base_url } from "../assets/server";
 import CommentContainer from "../components/CommentContainer";
 import { useEffect, useState } from "react";
 import TagContainer from "../components/TagContainer";
+import { useParams } from "react-router-dom";
 
 export async function loader({ params }) {
-  let res = await fetch(`${base_url}/articles/${params.Id}`);
-  const article = await res.json();
-  res = await fetch(`${base_url}/articles/${params.Id}/comments`);
-  const commentsList = await res.json();
-  return { article, commentsList };
+  //   return { article, commentsList };
+    return { Id: params.Id };
 }
 
 export default function Article() {
   const { user } = useUser();
-  const { article, commentsList } = useLoaderData();
-  const [comments, setComments] = useState(commentsList);
+    const params = useParams();
+  //   const { article, commentsList } = useLoaderData();
+  //   const [comments, setComments] = useState(commentsList);
+  const [article, setArticle] = useState({
+    articleTitle: "Article Title",
+    articleContent: "Article Content",
+    publisher: {
+      publisherName: "Publisher Name",
+      avatar: "https://i.pravatar.cc/300",
+    },
+    articleDate: new Date(),
+    tag: "tag1 tag2 tag3",
+  });
+  const [comments, setComments] = useState();
   const [tags, setTags] = useState([]);
 
   const handleCommentSubmit = async (e) => {
@@ -37,9 +47,16 @@ export default function Article() {
     }
   };
 
-  useEffect(()=>{
-    setTags(article.tag.split(" "))
-  },[article.tag])
+  useEffect(() => {
+    async function loadArticle() {
+      let res = await fetch(`${base_url}/articles/${params.Id}`);
+      setArticle(await res.json());
+      res = await fetch(`${base_url}/articles/${params.Id}/comments`);
+      setComments(await res.json());
+    }
+    loadArticle();
+    setTags(article.tag.split(" "));
+  }, [article.tag]);
   return (
     <article className="px-4 gap-4 h-full dark:text-white overflow-hidden grid grid-cols-4 sm:grid-cols-6 lg:grid-cols-12 dark:bg-gray-700">
       <div className="hidden overflow-y-auto sm:block lg:col-span-3"></div>

@@ -92,8 +92,6 @@ export default function AdminDashboard({ user }) {
     
   }, [ activeTab  ]);
 
-  
-
   return (
     <section className="px-4 py-1 pt-3 gap-4 h-full overflow-hidden grid grid-cols-4 sm:grid-cols-6 lg:grid-cols-12 dark:bg-gray-700">
       <div className="hidden overflow-y-auto lg:block col-span-3">
